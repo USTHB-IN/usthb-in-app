@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
 import 'package:usthbin/bloc/navigationcubit.dart';
 import 'package:usthbin/constants/const.dart';
+import 'package:usthbin/shared/services/extension.dart';
 
 class MyNavBar extends StatelessWidget {
+  static const String routeName = '/nav';
   const MyNavBar({super.key});
 
   @override
@@ -26,27 +28,36 @@ class MyNavBar extends StatelessWidget {
       Icons.assignment_turned_in,
       IconlyBold.profile,
     ];
-    return AlertDialog(
+    return Container(
+      width: double.infinity,
+      height: 780.sp,
+      padding: EdgeInsets.symmetric(vertical: 15.sp, horizontal: 20.sp),
+      child: AlertDialog(
         backgroundColor: kWhite,
-        content: Container(
-          width: 323.sp,
-          height: 780.sp,
-          padding: EdgeInsets.symmetric(vertical: 15.sp, horizontal: 20.sp),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  const Spacer(),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
+        shape: RoundedRectangleBorder(borderRadius: kBorderRadius),
+        content: Column(
+          children: [
+            Row(
+              children: [
+                const Spacer(),
+                IconButton(
+                  iconSize: 20,
+                  padding: const EdgeInsets.all(1),
+                  color: kBlack,
+                  icon: const Icon(
+                    Icons.close,
                   ),
-                ],
-              ),
-              SizedBox(height: 40.sp),
-              ListView.separated(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+            SizedBox(height: 40.sp),
+            Expanded(
+              child: ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) =>
                     NavBarItem(icon: icons[index], title: titles[index]),
                 separatorBuilder: (context, index) => Container(
@@ -60,10 +71,12 @@ class MyNavBar extends StatelessWidget {
                   )),
                 ),
                 itemCount: icons.length,
-              )
-            ],
-          ),
-        ));
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -81,43 +94,48 @@ class NavBarItem extends StatelessWidget {
             switch (title) {
               case 'Home':
                 context.read<NavigationCubit>().home();
-                Navigator.pushReplacementNamed(context, '/home');
+                context.pushReplacementNamed('/home');
                 break;
               case 'Chat':
                 context.read<NavigationCubit>().chat();
-                Navigator.pushReplacementNamed(context, '/chat');
+                context.pushReplacementNamed('/chat');
                 break;
               case 'Homeworks':
                 context.read<NavigationCubit>().homeworks();
-                Navigator.pushReplacementNamed(context, '/homeworks');
+                context.pushReplacementNamed('/homeworks');
                 break;
               case 'Ressources':
                 context.read<NavigationCubit>().ressources();
-                Navigator.pushReplacementNamed(context, '/ressources');
+                context.pushReplacementNamed('/ressources');
                 break;
               case 'Exams':
                 context.read<NavigationCubit>().exams();
-                Navigator.pushReplacementNamed(context, '/exams');
+                context.pushReplacementNamed('/exams');
                 break;
               case 'Profile':
                 context.read<NavigationCubit>().profile();
+                context.pushReplacementNamed('/profile');
                 break;
               default:
                 context.read<NavigationCubit>().home();
+                context.pushReplacementNamed('/home');
             }
           },
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                color: state == title ? kBlue : kDeactivateColor,
-              ),
-              SizedBox(width: 10.sp),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            ],
+          child: Padding(
+            padding: EdgeInsets.all(10.sp),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  color: state == title ? kBlue : kDeactivateColor,
+                ),
+                SizedBox(width: 10.sp),
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+            ),
           ),
         );
       },

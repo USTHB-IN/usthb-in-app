@@ -3,15 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:usthbin/bloc/homeworks/homework_cubit.dart';
+import 'package:usthbin/bloc/navigationcubit.dart';
+import 'package:usthbin/features/home/home_screen.dart';
+import 'package:usthbin/features/homework/homework_screen.dart';
 import 'package:usthbin/shared/services/dio_helper.dart';
-import 'package:usthbin/shared/widgets/loading.dart';
+import 'package:usthbin/shared/widgets/navbar.dart';
 
 import 'bloc/authbloc/auth_bloc.dart';
-import 'constants/const.dart';
 import 'constants/theme.dart';
 import 'features/auth/bloc/login_bloc.dart';
 import 'features/auth/login_screen.dart';
-import 'models/user/user.dart';
 
 void main() {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     DioHelper.init();
     authBloc = AuthBloc();
+    FlutterNativeSplash.remove();
     super.initState();
   }
 
@@ -54,6 +56,7 @@ class _MyAppState extends State<MyApp> {
             authBloc,
           ),
         ),
+        BlocProvider(create: (context) => NavigationCubit()),
         BlocProvider(
           create: (context) => HomeworksCubit(),
         )
@@ -69,29 +72,30 @@ class _MyAppState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               routes: {
                 LoginScreen.routeName: (context) => const LoginScreen(),
+                Home.routeName: (context) => const Home(),
+                HomeworkScreen.routeName: (context) => const HomeworkScreen(),
+                MyNavBar.routeName: (context) => const MyNavBar(),
               },
-              // home: const LoginScreen(),
-              home: BlocBuilder<AuthBloc, AuthState>(
-                builder: (context, state) {
-                  return state.when(initial: () {
-                    return const Center(child: Text('Initial'));
-                  }, loading: () {
-                    FlutterNativeSplash.remove();
-                    return const Loading(
-                      color: kBlue,
-                    );
-                  }, authenticated: (User user) {
-                    return const Loading(
-                      color: kBlue,
-                    );
-                  }, unauthenticated: () {
-                    return const LoginScreen();
-                  }, failure: (String message) {
-                    FlutterNativeSplash.remove();
-                    return const LoginScreen();
-                  });
-                },
-              ),
+              // home: const Home(),
+              // home: BlocBuilder<AuthBloc, AuthState>( builder: (context, state) { //     return state.when(initial: () {
+              //       return const Center(child: Text('Initial'));
+              //     }, loading: () {
+              //       FlutterNativeSplash.remove();
+              //       return const Loading(
+              //         color: kBlue,
+              //       );
+              //     }, authenticated: (User user) {
+              //       return const Loading(
+              //         color: kBlue,
+              //       );
+              //     }, unauthenticated: () {
+              //       return const LoginScreen();
+              //     }, failure: (String message) {
+              //       FlutterNativeSplash.remove();
+              //       return const LoginScreen();
+              //     });
+              //   },
+              // ),
             );
           }),
     );

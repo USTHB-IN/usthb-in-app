@@ -38,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                   onPressed: () {
-                    Navigation(context).pushReplacementNamed('/navbar');
+                    context.showNavBar();
                   },
                 ),
               ],

@@ -18,6 +18,7 @@ part './widgets/homeworks.dart';
 part './widgets/opportunities.dart';
 
 class Home extends StatelessWidget {
+  static const String routeName = '/home';
   const Home({super.key});
 
   @override

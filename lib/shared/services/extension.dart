@@ -1,4 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:usthbin/shared/widgets/navbar.dart';
+
+extension ShowDialog on BuildContext {
+  void showNavBar() {
+    showDialog(
+      context: this,
+      builder: (context) => const MyNavBar(),
+    );
+  }
+}
 
 extension Navigation on BuildContext {
   void push(Widget page) {

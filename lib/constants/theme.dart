@@ -6,11 +6,21 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     primaryColor: kBlue,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: const Color(0xFFF1F1F1),
     fontFamily: 'Poppins',
     textTheme: TextTheme(
         titleLarge: TextStyle(
           fontSize: 36.sp,
+          fontWeight: FontWeight.w600,
+          color: kBlack,
+        ),
+        titleMedium: TextStyle(
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w600,
+          color: kBlack,
+        ),
+        titleSmall: TextStyle(
+          fontSize: 16.sp,
           fontWeight: FontWeight.w600,
           color: kBlack,
         ),
@@ -22,11 +32,6 @@ class AppTheme {
         bodyMedium: TextStyle(
           fontSize: 14.sp,
           fontWeight: FontWeight.w400,
-          color: kBlack,
-        ),
-        titleMedium: TextStyle(
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w600,
           color: kBlack,
         ),
         bodySmall: TextStyle(
@@ -47,7 +52,10 @@ class AppTheme {
     inputDecorationTheme: InputDecorationTheme(
       border: kTextInputOutline,
       focusedBorder: kTextInputOutlineFocus,
+      enabledBorder: kTextInputOutline,
+      disabledBorder: kTextInputOutline,
       errorBorder: kTextInputOutlineError,
+      focusedErrorBorder: kTextInputOutlineError,
       fillColor: Colors.white,
       filled: true,
       contentPadding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 15.sp),

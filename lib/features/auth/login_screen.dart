@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:usthbin/constants/const.dart';
-import 'package:usthbin/shared/widgets/custom_textfield.dart';
+import 'package:usthbin/shared/widgets/custom_formtextfield.dart';
 import 'package:usthbin/shared/widgets/password_input.dart';
 
 import 'bloc/login_bloc.dart';

@@ -10,24 +10,43 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
+
     return BlocBuilder<NavigationCubit, String>(
       builder: (context, state) {
         return SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            padding: kDefaultPadding,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  state,
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
+                parentRoute?.canPop ?? false
+                    ? IconButton(
+                        icon: Container(
+                          padding: EdgeInsets.all(5.sp),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: kBlack,
+                            borderRadius: kBorderRadius,
+                          ),
+                          child: Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            size: 15.sp,
+                            color: kWhite,
+                          ),
+                        ),
+                        onPressed: () {
+                          context.pop();
+                        },
+                      )
+                    : Text(
+                        state,
+                        style: Theme.of(context).textTheme.displayLarge,
+                      ),
                 IconButton(
                   icon: Container(
-                    width: 26.sp,
-                    height: 26.sp,
-                    padding: EdgeInsets.all(1.sp),
+                    padding: EdgeInsets.all(5.sp),
                     decoration: BoxDecoration(
                       color: kBlack,
                       borderRadius: kBorderRadius,

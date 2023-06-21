@@ -36,24 +36,29 @@ class MyNavBar extends StatelessWidget {
         backgroundColor: kWhite,
         shape: RoundedRectangleBorder(borderRadius: kBorderRadius),
         content: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               children: [
                 const Spacer(),
-                IconButton(
-                  iconSize: 20,
-                  padding: const EdgeInsets.all(1),
-                  color: kBlack,
-                  icon: const Icon(
-                    Icons.close,
+                InkWell(
+                  onTap: () => context.pop(),
+                  child: Container(
+                    width: 26.sp,
+                    height: 26.sp,
+                    decoration: BoxDecoration(
+                        color: kBlack, borderRadius: kBorderRadius),
+                    child: Icon(
+                      Icons.close_rounded,
+                      color: kWhite,
+                      size: 17.sp,
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
                 ),
               ],
             ),
-            SizedBox(height: 40.sp),
+            SizedBox(height: 50.sp),
             Expanded(
               child: ListView.separated(
                 shrinkWrap: true,
@@ -62,10 +67,10 @@ class MyNavBar extends StatelessWidget {
                     NavBarItem(icon: icons[index], title: titles[index]),
                 separatorBuilder: (context, index) => Container(
                   width: double.infinity,
-                  margin: EdgeInsets.symmetric(vertical: 31.sp),
+                  margin: EdgeInsets.symmetric(vertical: 25.sp),
                   decoration: BoxDecoration(
                       border: Border.all(
-                    color: kDeactivateColor,
+                    color: kDeactivateColor.withOpacity(.2),
                     width: 1.sp,
                     strokeAlign: BorderSide.strokeAlignCenter,
                   )),
@@ -94,23 +99,23 @@ class NavBarItem extends StatelessWidget {
             switch (title) {
               case 'Home':
                 context.read<NavigationCubit>().home();
-                context.pushReplacementNamed('/home');
+                context.pushNamedAndRemoveUntil('/home');
                 break;
               case 'Chat':
                 context.read<NavigationCubit>().chat();
-                context.pushReplacementNamed('/chat');
+                context.pushNamedAndRemoveUntil('/chat');
                 break;
               case 'Homeworks':
                 context.read<NavigationCubit>().homeworks();
-                context.pushReplacementNamed('/homeworks');
+                context.pushNamedAndRemoveUntil('/homeworks');
                 break;
               case 'Ressources':
                 context.read<NavigationCubit>().ressources();
-                context.pushReplacementNamed('/ressources');
+                context.pushNamedAndRemoveUntil('/ressources');
                 break;
               case 'Exams':
                 context.read<NavigationCubit>().exams();
-                context.pushReplacementNamed('/exams');
+                context.pushNamedAndRemoveUntil('/exams');
                 break;
               case 'Profile':
                 context.read<NavigationCubit>().profile();
@@ -118,12 +123,13 @@ class NavBarItem extends StatelessWidget {
                 break;
               default:
                 context.read<NavigationCubit>().home();
-                context.pushReplacementNamed('/home');
+                context.pushNamedAndRemoveUntil('/home');
             }
           },
           child: Padding(
-            padding: EdgeInsets.all(10.sp),
+            padding: EdgeInsets.all(10.sp).copyWith(left: 50.sp),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
                   icon,

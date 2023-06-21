@@ -42,6 +42,10 @@ extension Navigation on BuildContext {
     );
   }
 
+  void pushNamedAndRemoveUntil(String name) {
+    Navigator.of(this).pushNamedAndRemoveUntil(name, (route) => false);
+  }
+
   void pop() {
     Navigator.of(this).pop();
   }

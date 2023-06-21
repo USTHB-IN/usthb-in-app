@@ -12,11 +12,21 @@
         "**/.settings": true,
         ".dart_tool": true,
         ".vscode": true,
-        ".idea": true
+        ".idea": true,
+        "linux": true,
+        "macos": true,
+        "test": true,
+        "web": true,
+        "windows": true
     },
     "hide-files.files": [
         ".dart_tool",
         ".vscode",
-        ".idea"
+        ".idea",
+        "linux",
+        "macos",
+        "test",
+        "web",
+        "windows"
     ]
 }

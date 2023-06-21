@@ -14,4 +14,8 @@ class HomeworkTypeCubit extends Cubit<String> {
   void value(String value) {
     emit(value);
   }
+
+  void changeType(String type) {
+    emit(type);
+  }
 }

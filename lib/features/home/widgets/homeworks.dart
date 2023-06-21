@@ -33,9 +33,9 @@ class HomeworksWidget extends StatelessWidget {
                   children: List.generate(
                     2,
                     (index) => HomeworksContent(
-                      title: homeworks[index].title,
-                      content: homeworks[index].content,
-                      date: homeworks[index].date,
+                      title: homeworks[index].name,
+                      content: homeworks[index].description,
+                      date: homeworks[index].deadline,
                     ),
                   ),
                 ),

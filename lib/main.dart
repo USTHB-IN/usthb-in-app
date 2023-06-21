@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:usthbin/bloc/homeworks/homework_cubit.dart';
 import 'package:usthbin/bloc/navigationcubit.dart';
 import 'package:usthbin/features/home/home_screen.dart';
 import 'package:usthbin/features/homework/homework_screen.dart';
+import 'package:usthbin/features/ressource/ressource_screen.dart';
 import 'package:usthbin/shared/services/dio_helper.dart';
 import 'package:usthbin/shared/widgets/navbar.dart';
 
@@ -57,9 +57,6 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         BlocProvider(create: (context) => NavigationCubit()),
-        BlocProvider(
-          create: (context) => HomeworksCubit(),
-        )
       ],
       child: ScreenUtilInit(
           designSize: const Size(393, 852),
@@ -74,9 +71,10 @@ class _MyAppState extends State<MyApp> {
                 LoginScreen.routeName: (context) => const LoginScreen(),
                 Home.routeName: (context) => const Home(),
                 HomeworkScreen.routeName: (context) => const HomeworkScreen(),
+                RessourceScreen.routeName: (context) => const RessourceScreen(),
                 MyNavBar.routeName: (context) => const MyNavBar(),
               },
-              // home: const Home(),
+              initialRoute: RessourceScreen.routeName,
               // home: BlocBuilder<AuthBloc, AuthState>( builder: (context, state) { //     return state.when(initial: () {
               //       return const Center(child: Text('Initial'));
               //     }, loading: () {

@@ -19,6 +19,11 @@ const kDeactivateColor = Color(0xFFA1A1A1);
 const kStroke = Color(0xFF949494);
 const kStrokeBorder = Color(0xFFEAEAEA);
 const kStrokeClub = Color(0xFFD9D9D9);
+const kHintTextColor = Color(0xFF8F8F8F);
+
+const kOrange = Color(0xFFFF8541);
+const kGreeny = Color(0xFF00CCB1);
+const kViolet = Color(0xFF5643C1);
 
 final kDefaultPadding = EdgeInsets.symmetric(horizontal: 20.sp);
 final kCornerRadius = 10.sp;
